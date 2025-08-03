@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个网页</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>我的网站</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">关于</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#zodiac" class="nav-link">星座查询</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">联系</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <!-- 英雄区域 -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">欢迎来到我的网站</h1>
+                    <p class="hero-description">
+                        这是一个使用HTML、CSS和JavaScript创建的现代化网页。
+                        让我们一起探索前端开发的奇妙世界！
+                    </p>
+                    <button class="cta-button" onclick="showMessage()">点击我</button>
+                </div>
+                <div class="hero-image">
+                    <div class="placeholder-image">
+                        <span>🎨</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于区域 -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">关于我们</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>我们致力于创建美观、实用的网页体验。通过现代化的设计理念和最新的技术栈，为用户提供最佳的浏览体验。</p>
+                        <div class="features">
+                            <div class="feature">
+                                <div class="feature-icon">🚀</div>
+                                <h3>快速加载</h3>
+                                <p>优化的代码确保页面快速加载</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">📱</div>
+                                <h3>响应式设计</h3>
+                                <p>适配各种设备和屏幕尺寸</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">🎨</div>
+                                <h3>现代设计</h3>
+                                <p>简洁美观的用户界面设计</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 星座查询区域 -->
+        <section id="zodiac" class="zodiac">
+            <div class="container">
+                <h2 class="section-title">星座查询</h2>
+                <div class="zodiac-content">
+                    <div class="zodiac-intro">
+                        <p>想知道你的星座吗？输入你的生日，让我们来告诉你！</p>
+                    </div>
+                    <div class="zodiac-form">
+                        <div class="form-group">
+                            <label for="birthday">选择你的生日</label>
+                            <input type="date" id="birthday" name="birthday" required>
+                        </div>
+                        <button type="button" class="zodiac-button" onclick="checkZodiac()">查询星座</button>
+                    </div>
+                    <div class="zodiac-result" id="zodiacResult" style="display: none;">
+                        <div class="result-card">
+                            <div class="zodiac-icon" id="zodiacIcon">♈</div>
+                            <h3 id="zodiacName">白羊座</h3>
+                            <p id="zodiacDate">3月21日 - 4月19日</p>
+                            <div class="zodiac-description" id="zodiacDescription">
+                                白羊座的人充满活力，勇敢无畏，是天生的领导者。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系区域 -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">联系我们</h2>
+                <div class="contact-content">
+                    <form class="contact-form" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">消息</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 我的网站. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
