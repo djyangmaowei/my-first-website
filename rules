@@ -1,0 +1,218 @@
+---
+description: markdown 文件编写规则
+globs: *.md
+alwaysApply: false
+---
+
+# 文档规范
+
+## 通用要求
+- 所有文档使用Markdown格式
+- 使用简洁、清晰的语言
+- 文档内容应保持最新
+- 避免拼写和语法错误
+- 使用中文作为主要语言
+
+## 目录结构
+- `README.md`：项目根目录，提供项目概述
+- `docs/`：存放详细文档
+  - `guide/`：使用指南
+  - `api/`：API文档
+  - `examples/`：示例代码文档
+
+## README.md 内容规范
+- 项目名称和简短描述
+- 技术栈说明
+- 项目结构说明
+- 使用说明
+- 许可证信息
+
+## 版本记录规范
+- 使用 `CHANGELOG.md` 记录版本变更
+- 遵循语义化版本（Semantic Versioning）规范
+- 每个版本应包含：新增功能、修复问题、破坏性变更
+
+## 文档内容组织
+- 从整体到局部，从简单到复杂
+- 重要信息放在前面
+- 相关内容应当放在一起
+- 使用小标题和列表增强可读性
+- 避免过长段落，保持内容简洁
+
+## 代码示例规范
+- 提供完整可运行的示例
+- 代码应当简洁且易于理解
+- 添加适当的注释解释关键部分
+- 说明代码的预期输出或行为
+- 更新示例以匹配最新API
+
+---
+
+description: 辅助生成 git 提交信息
+globs:
+alwaysApply: false
+---
+
+# Git 规则
+
+## 重要原则
+- **重要**：不要自动提交 git 代码，除非有明确的提示
+- 提交前确保代码通过所有测试
+- 保持提交信息简洁明了，描述清楚变更内容
+- 避免大型提交，尽量将变更分解为小的、相关的提交
+
+## 提交规范
+git 提交模板<type>(<scope>): <subject>，具体要求如下：
+1. 注意冒号 : 后有空格
+2. type 的枚举值有：
+- feat: 新增功能
+- fix: 修复 bug
+- docs: 文档注释
+- style: 代码格式(不影响代码运行的变动)
+- refactor: 重构、优化(既不增加新功能, 也不是修复bug)
+- perf: 性能优化
+- test: 增加测试
+- chore: 构建过程或辅助工具的变动
+- revert: 回退
+- build: 打包
+3. 若 subject 中描述超过两种要点，请使用要点列表描述详情，每个要点使用-符号开头，多个换行，参考如下样例：
+```
+feat(web): implement email verification workflow
+
+- Add email verification token generation service
+- Create verification email template with dynamic links
+- Add API endpoint for token validation
+- Update user model with verification status field
+```
+
+## 分支管理
+- main/master: 主分支，保持稳定可发布状态
+- develop: 开发分支，包含最新开发特性
+- feature/*: 功能分支，用于开发新功能
+- bugfix/*: 修复分支，用于修复bug
+- release/*: 发布分支，用于准备发布
+
+**常用分支命名约定**：
+
+| 分支类型   | 命名格式             | 示例                      |
+| ---------- | -------------------- | ------------------------- |
+| 功能分支   | feature/[描述]       | feature/user-auth         |
+| 修复分支   | fix/[问题ID]-[描述]  | fix/issue-42-login-crash  |
+| 发布分支   | release/[版本]       | release/v2.1.0            |
+| 热修复分支 | hotfix/[版本]-[描述] | hotfix/v2.0.1-payment-fix |
+
+---
+
+description: Gitflow 工作流规则
+globs:
+alwaysApply: false
+---
+
+# Gitflow 工作流规则
+
+## 主分支
+
+### main（或master）
+- 包含生产就绪代码
+- 永远不要直接提交到main分支
+- 只接受来自以下分支的合并：
+  - hotfix/* 分支
+  - release/* 分支
+- 每次合并后必须使用版本号标记
+
+### develop
+- 主开发分支
+- 包含最新交付的开发变更
+- 功能分支的源分支
+- 永远不要直接提交到develop分支
+
+## 支持分支
+
+### feature/*
+- 从develop分支创建
+- 合并回：develop
+- 命名约定：feature/[issue-id]-描述性名称
+- 示例：feature/123-user-authentication
+- 创建PR前必须与develop分支保持同步
+- 合并后删除
+
+### release/*
+- 从develop分支创建
+- 合并回：
+  - main
+  - develop
+- 命名约定：release/vX.Y.Z
+- 示例：release/v1.2.0
+- 仅进行bug修复、文档编写及与发布相关的任务
+- 不添加新功能
+- 合并后删除
+
+### hotfix/*
+- 从main分支创建
+- 合并回：
+  - main
+  - develop
+- 命名约定：hotfix/vX.Y.Z
+- 示例：hotfix/v1.2.1
+- 仅用于紧急生产环境修复
+- 合并后删除
+
+## 提交信息
+
+- 格式：`type(scope): description`
+- 类型：
+  - feat: 新功能
+  - fix: Bug修复
+  - docs: 文档变更
+  - style: 格式调整、缺失分号等
+  - refactor: 代码重构
+  - test: 添加测试
+  - chore: 维护任务
+
+## 版本控制
+
+### 语义化版本
+- MAJOR版本用于不兼容的API变更
+- MINOR版本用于向后兼容的功能性变更
+- PATCH版本用于向后兼容的bug修复
+
+## Pull Request规则
+
+1. 所有变更必须通过Pull Request进行
+2. 所需批准：至少1个
+3. CI检查必须通过
+4. 不允许直接提交到受保护分支（main, develop）
+5. 合并前分支必须保持最新
+6. 合并后删除分支
+
+## 分支保护规则
+
+### main和develop
+- 要求Pull Request审核
+- 要求状态检查通过
+- 要求分支保持最新
+- 限制规则包括管理员
+- 禁止强制推送
+- 禁止删除
+
+## 发布流程
+
+1. 从develop创建release分支
+2. 更新版本号
+3. 修复任何与发布相关的问题
+4. 创建PR到main
+5. 合并到main后：
+   - 标记发布
+   - 合并回develop
+   - 删除release分支
+
+## 热修复流程
+
+1. 从main创建hotfix分支
+2. 修复问题
+3. 更新patch版本号
+4. 创建PR到main
+5. 合并到main后：
+   - 标记发布
+   - 合并回develop
+   - 删除hotfix分支

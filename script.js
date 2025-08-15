@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initMobileMenu();
     initScrollEffects();
     initFormValidation();
+    getVisitorIP();
 });
 
 // 移动端菜单功能
@@ -427,4 +428,58 @@ window.addEventListener('load', function () {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
-}); 
+});
+
+// 获取访问者IP地址
+async function getVisitorIP() {
+    const ipElement = document.getElementById('visitorIP');
+    
+    try {
+        // 使用多个IP查询服务作为备选方案
+        const ipServices = [
+            'https://api.ipify.org?format=json',
+            'https://api.myip.com',
+            'https://ipapi.co/json/'
+        ];
+        
+        let ip = null;
+        
+        for (const service of ipServices) {
+            try {
+                const response = await fetch(service, { 
+                    method: 'GET',
+                    timeout: 5000 
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (service.includes('ipify')) {
+                        ip = data.ip;
+                    } else if (service.includes('myip')) {
+                        ip = data.ip;
+                    } else if (service.includes('ipapi')) {
+                        ip = data.ip;
+                    }
+                    
+                    if (ip) break;
+                }
+            } catch (error) {
+                console.log(`IP服务 ${service} 失败:`, error);
+                continue;
+            }
+        }
+        
+        if (ip) {
+            ipElement.textContent = ip;
+            ipElement.style.color = '#059669'; // 成功时显示绿色
+        } else {
+            throw new Error('无法获取IP地址');
+        }
+        
+    } catch (error) {
+        console.error('获取IP地址失败:', error);
+        ipElement.textContent = '获取失败';
+        ipElement.style.color = '#dc2626'; // 失败时显示红色
+    }
+}
